@@ -11,13 +11,13 @@ const home = async (req,res) => {
 
 const signup = async (req,res) => {
   try {
-    const {nickname,password} = req.body;
+    const {fullName,email,password,role,institution} = req.body;
 
-    let checkUser = await User.findOne({nickname});
+    let checkUser = await User.findOne({email});
 
     if(checkUser) { return res.json({message:"ALready have an account please login"})}
     let isAdmin;
-    let createUser = await User.create({nickname,password,isAdmin})
+    let createUser = await User.create({fullName,email,password,role,institution})
     return res.json(createUser)
 
   } catch (error) {
